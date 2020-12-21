@@ -3,11 +3,12 @@
         <form #noteForm="ngForm" (ngSubmit)="onSubmit(noteForm)">
             <div class="form-group">
                 <label class="font-weight-bold" for="inputTitle">Title</label>
-                <input type="text" class="form-control" id="inputTitle" placeholder="Title of the note" required>
+                <input name="title" [ngModel]="note.title" type="text" class="form-control" id="inputTitle"
+                    placeholder="Title of the note" required>
             </div>
             <div class="form-group">
                 <label class="font-weight-bold" for="noteBody">Note</label>
-                <textarea class="form-control" id="noteBody" rows="3"
+                <textarea name="body" [ngModel]="note.body" class="form-control" id="noteBody" rows="3"
                     placeholder="Content of note goes here"></textarea>
             </div>
             <div class="form-group float-right">
