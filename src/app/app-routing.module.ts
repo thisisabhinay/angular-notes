@@ -13,6 +13,17 @@ const routes: Routes = [
                 path: "",
                 component: NotesListComponent
             }, {
+                /* 
+                    Make sure 'new' route is above ':id' route as Angular resolves routes 
+                    from top to bottom.
+
+                    So if the :id route is above the 'new' route and a request is made to
+                    '/new' the Angular will match the :id route and treat the new string 
+                    as the id parameter
+                */
+                path: "new",
+                component: NoteDetailsComponent
+            }, {
                 path: ":id",
                 component: NoteDetailsComponent
             }

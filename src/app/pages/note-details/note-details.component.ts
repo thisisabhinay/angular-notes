@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Note } from "src/app/shared/note.model";
 import { NotesService } from "src/app/shared/notes.service";
 
@@ -13,9 +13,25 @@ import { NotesService } from "src/app/shared/notes.service";
 export class NoteDetailsComponent implements OnInit {
     note: Note;
 
-    constructor(private notesService: NotesService, private router: Router) { }
+    constructor(
+        private notesService: NotesService,
+        private router: Router,
+        private route: ActivatedRoute
+    ) { }
 
     ngOnInit(): void {
+        // We want to find if we are creating a new note or editing an existing one
+        /* 
+        =============================================================================
+        An observer is just a callback function which will be executed each time 
+        a new message is emitted from the 'observable', which in this case is the
+        'params'
+
+        This callback is executed each time there's a change in the route parameters
+        ============================================================================= 
+        */
+
+        this.route.params.subscribe((params: Params) => { });
         this.note = new Note();
     }
 
