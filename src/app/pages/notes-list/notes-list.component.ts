@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+/* eslint-disable @typescript-eslint/no-empty-function */
+import { Component, OnInit } from "@angular/core";
+import { Note } from "src/app/shared/note.model";
+import { NotesService } from "src/app/shared/notes.service";
 
 @Component({
-  selector: 'app-notes-list',
-  templateUrl: './notes-list.component.html',
-  styleUrls: ['./notes-list.component.sass']
+    selector: "app-notes-list",
+    templateUrl: "./notes-list.component.html",
+    styleUrls: ["./notes-list.component.sass"]
 })
 export class NotesListComponent implements OnInit {
+    notes: Note[] = new Array<Note>();
+    constructor(private notesService: NotesService) { }
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+        // Retrieving all notes from the NoteService
+        this.notes = this.notesService.getAll();
+    }
 
 }

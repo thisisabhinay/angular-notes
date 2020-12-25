@@ -20,5 +20,6 @@ export class NoteDetailsComponent implements OnInit {
 
     onSubmit(form: NgForm): void {
         this.notesService.add(form.value);
+        console.log(this.notesService.getAll());
     }
 }
