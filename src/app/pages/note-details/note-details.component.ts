@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Params, Router } from "@angular/router";
 import { Note } from "src/app/shared/note.model";
 import { NotesService } from "src/app/shared/notes.service";
 
@@ -12,6 +12,8 @@ import { NotesService } from "src/app/shared/notes.service";
 })
 export class NoteDetailsComponent implements OnInit {
     note: Note;
+    noteId: unknown;
+    new: boolean;
 
     constructor(
         private notesService: NotesService,
@@ -31,8 +33,16 @@ export class NoteDetailsComponent implements OnInit {
         ============================================================================= 
         */
 
-        this.route.params.subscribe((params: Params) => { });
-        this.note = new Note();
+        this.route.params.subscribe((params: Params) => {
+            this.note = new Note();
+            if (!params.id) {
+                this.new = true;
+                return;
+            }
+            this.note = this.notesService.get(params.id);
+            this.noteId = params.id;
+            this.new = false;
+        });
     }
 
     onSubmit(form: NgForm): void {
