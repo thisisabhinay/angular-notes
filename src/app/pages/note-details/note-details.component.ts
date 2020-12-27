@@ -12,7 +12,7 @@ import { NotesService } from "src/app/shared/notes.service";
 })
 export class NoteDetailsComponent implements OnInit {
     note: Note;
-    noteId: any;
+    noteId: number;
     new: boolean;
 
     constructor(
@@ -40,7 +40,7 @@ export class NoteDetailsComponent implements OnInit {
                 return;
             }
             this.note = this.notesService.get(params.id);
-            this.noteId = params.id;
+            this.noteId = parseInt(params.id); // Assuming Id(s) to be a integer number
             this.new = false;
         });
     }

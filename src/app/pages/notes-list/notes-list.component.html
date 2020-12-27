@@ -19,9 +19,11 @@
 
 <div class="row notes-list">
     <div class="col">
-        <app-note-card *ngFor="let note of notes"
+        <app-note-card *ngFor="let note of notes; index as i"
+            [link]="i"
             [title]="note.title"
-            [body]="note.body">
+            [body]="note.body"
+            (delete)="deleteNote(i)">
         </app-note-card>
 
         <hr/>

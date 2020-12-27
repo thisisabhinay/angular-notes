@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from "@angular/core";
+import { Component, ElementRef, Input, OnInit, Output, Renderer2, ViewChild, EventEmitter } from "@angular/core";
 
 @Component({
     selector: "app-note-card",
@@ -10,6 +10,9 @@ export class NoteCardComponent implements OnInit {
 
     @Input("title") title: string;
     @Input("body") body: string;
+    @Input("link") link: string;
+
+    @Output("delete") deleteEvent: EventEmitter<void> = new EventEmitter<void>();
 
     @ViewChild("truncator") truncator: ElementRef<HTMLElement>;
     @ViewChild("bodyText") bodyText: ElementRef<HTMLElement>;
@@ -29,6 +32,10 @@ export class NoteCardComponent implements OnInit {
             this.renderer.setStyle(this.truncator.nativeElement, "didplay", "none");
         }
         */
+    }
+
+    deleteNote(): void {
+        this.deleteEvent.emit();
     }
 
 }
