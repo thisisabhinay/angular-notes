@@ -12,7 +12,7 @@ import { NotesService } from "src/app/shared/notes.service";
 })
 export class NoteDetailsComponent implements OnInit {
     note: Note;
-    noteId: unknown;
+    noteId: any;
     new: boolean;
 
     constructor(
@@ -30,7 +30,7 @@ export class NoteDetailsComponent implements OnInit {
         'params'
 
         This callback is executed each time there's a change in the route parameters
-        ============================================================================= 
+        =============================================================================
         */
 
         this.route.params.subscribe((params: Params) => {
@@ -46,7 +46,11 @@ export class NoteDetailsComponent implements OnInit {
     }
 
     onSubmit(form: NgForm): void {
-        this.notesService.add(form.value);
+        this.new ?
+            this.notesService.add(form.value) :
+            this.notesService.update(this.noteId, form.value.title, form.value.body);
+
+        // Route back to home page (Notes List View)
         this.router.navigateByUrl("/");
     }
 
